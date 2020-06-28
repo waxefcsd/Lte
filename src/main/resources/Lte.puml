@@ -1,0 +1,46 @@
+@startuml
+
+class HttpClientFactory{
+   HttpClientFactory();
+   HttpAsyncClient getHttpAsyncClientPool();
+   HttpSyncClient getHttpClientPool();
+}
+
+class HttpAsyncClient implements HttpClientFactory{
+   CloseableHttpAsyncClient createAsyncClient();
+   CloseableHttpAsyncClient getAsyncHttpClient();
+}
+
+class HttpSyncClient implements HttpClientFactory{
+  CloseableHttpClient createClient();
+  CloseableHttpClient getHttpClient();
+}
+
+class HttpClientService{
+  void exeAsyncReq(String baseUrl,
+   boolean isPost,List<BasicNameValuePair> urlParams,
+   List<BasicNameValuePair> postBody, FutureCallback callback);
+}
+
+
+HttpClientService -->HttpClientFactory
+
+
+
+class HttpClientUse{
+void getConfCall(String actionType,String id);
+}
+HttpClientUse --> HttpClientService
+
+class MyRunnable{
+ MyRunnable(String actionType,String deliverySessionId);
+ void run();
+}
+MyRunnable --> HttpClientUse
+
+class LteController{
+ String Deliverysession(HttpServletRequest request)
+}
+LteController -->MyRunnable
+
+@enduml
