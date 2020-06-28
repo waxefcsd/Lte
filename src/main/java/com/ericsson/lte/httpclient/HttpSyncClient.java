@@ -40,14 +40,18 @@ public class HttpSyncClient {
 
     private CloseableHttpClient httpClient;
 
-    // 应用启动的时候就应该执行的方法
+    /* 应用启动的时候就应该执行的方法
+
+     */
     public HttpSyncClient() {
 
         this.httpClient = createClient();
     }
 
     public CloseableHttpClient createClient() {
-        // 初始化连接池
+        /* 初始化连接池
+
+         */
         cm = new PoolingClientConnectionManager();
         cm.setMaxTotal(maxConnNum);
         cm.setDefaultMaxPerRoute(maxPerRoute);
@@ -55,9 +59,9 @@ public class HttpSyncClient {
         httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION,
                 HttpVersion.HTTP_1_1);
         httpParams.setIntParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
-                connectTimeout);// 请求超时时间
+                connectTimeout);
         httpParams.setIntParameter(CoreConnectionPNames.SO_TIMEOUT,
-                socketTimeout);// 读取数据超时时间
+                socketTimeout);
 
         CloseableHttpClient httpclient = new DefaultHttpClient(cm, httpParams);
 

@@ -4,7 +4,7 @@ package com.ericsson.lte.httpclient;
 
 /**
  *
- * httpclient 工厂类
+ *@description: httpclient 工厂类
  * */
 public class HttpClientFactory {
 

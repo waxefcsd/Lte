@@ -59,17 +59,23 @@ public class HttpAsyncClient {
 
 
 
-        // 设置协议http对应的处理socket链接工厂的对象
+        /*
+        设置协议http对应的处理socket链接工厂的对象
+         */
         Registry<SchemeIOSessionStrategy> sessionStrategyRegistry = RegistryBuilder
                 .<SchemeIOSessionStrategy> create()
                 .register("http", NoopIOSessionStrategy.INSTANCE)
                 .build();
 
-        // 配置io线程
+        /* 配置io线程
+
+         */
         IOReactorConfig ioReactorConfig = IOReactorConfig.custom()
                 .setIoThreadCount(Runtime.getRuntime().availableProcessors())
                 .build();
-        // 设置连接池大小
+        /* 设置连接池大小
+
+         */
         ConnectingIOReactor ioReactor;
         ioReactor = new DefaultConnectingIOReactor(ioReactorConfig);
         PoolingNHttpClientConnectionManager conMgr = new PoolingNHttpClientConnectionManager(
@@ -79,7 +85,9 @@ public class HttpAsyncClient {
             conMgr.setMaxTotal(poolSize);
         }
 
-        //每个主机最大的并发量
+        /*每个主机最大的并发量
+
+         */
         if (maxPerRoute > 0) {
             conMgr.setDefaultMaxPerRoute(maxPerRoute);
         } else {

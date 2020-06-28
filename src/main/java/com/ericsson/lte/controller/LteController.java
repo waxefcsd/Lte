@@ -20,7 +20,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-
+/**
+ * @version: V1.0
+ * @author: dingchang
+ * @description:controller实现
+ **/
 @Slf4j
 @RestController
 @RequestMapping("/nbi")
@@ -28,6 +32,12 @@ public class LteController {
 
     ScheduledExecutorService pool = Executors.newScheduledThreadPool(10);
 
+    /**
+     * @author:  dingchang
+     * @methodsName: Deliverysession
+     * @description: 实现Session控制器
+     * @return: String
+     */
     @RequestMapping(value = "/deliverysession",method = RequestMethod.POST)
     public String Deliverysession(HttpServletRequest request){
 
@@ -48,11 +58,11 @@ public class LteController {
             pool.schedule(myRunnableStart,StartTime, TimeUnit.MILLISECONDS);
             MyRunnable myRunnableStop=new MyRunnable("Stop",DeliverySessionId);
             pool.schedule(myRunnableStop,StopTime, TimeUnit.MILLISECONDS);
-
+            response="200";
         }catch (Exception e){
             e.printStackTrace();
+            response="400";
         }
-        response="200";
         return response;
     }
 
