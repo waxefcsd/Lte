@@ -4,7 +4,7 @@
 2.springboot框架实现 version 0.0.1
 
 3.根据request的请求，得到starttime和stoptime，将请求放入线程池中，通过AsyncClient实现异步请求。
-  程序中使用了工厂模式，使用HttpClientFactory封装同步和异步两种请求方式，在HttpClientService调用AsyncClient进行异步请求。
+  使用HttpClientFactory封装同步和异步两种请求方式，在HttpClientService调用AsyncClient进行异步请求。
 4.# UML
 ![Image text](https://github.com/waxefcsd/Lte/blob/master/Lte.png)
 
